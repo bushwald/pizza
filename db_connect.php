@@ -1,6 +1,6 @@
 <?php
 $host = "****";
-$user = "bushwald";
+$user = "****";
 $pass = "****";
 $db = "****";
 $port = ****;
