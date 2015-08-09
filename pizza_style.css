@@ -1,0 +1,28 @@
+body {
+	background:
+		url(/images/pizza_bg.jpg) 50% 300px;
+	color: #484848;
+}
+
+table, th, td {
+    margin: 0 auto;
+    border: 1px solid #ADADAD;
+    border-collapse: collapse;
+    text-align: center;
+    padding: 3px;
+    color: #484848;
+}
+
+h4, h3, h2 {
+    margin: 0 auto;
+    color: #484848;
+}
+
+.centerDiv { 
+    width: 80%; 
+    height:auto;
+    min-height:900px;
+    margin: 0 auto; 
+    background-color:#FFFFFF;
+    color: #484848;
+}
