@@ -1,8 +1,7 @@
 <?php
-//include("/db_connect.php");
-include("/home/ubuntu/workspace/classes/MySqlArray.php");
-include("/home/ubuntu/workspace/pizzaSql.php");
-include ("/home/ubuntu/workspace/db_connect.php");
+include($_SERVER['DOCUMENT_ROOT'] . "/classes/MySqlArray.php");
+include($_SERVER['DOCUMENT_ROOT'] . "/pizzaSql.php");
+include ($_SERVER['DOCUMENT_ROOT'] . "/db_connect.php");
 $quality = new MySqlArrayBasic($qualityRatingSql);
 $qualityArray = $quality->getArray();
 $thickness = new MySqlArrayBasic($crustRatingSql);
@@ -18,17 +17,17 @@ if(isset($_POST['pName']) && !empty($_POST['pName']) && isset($_POST['pCity']) &
 if(isset($_POST['pzRateID']) && !empty($_POST['pzRateID']) && isset($_POST['pRateName']) && !empty($_POST['pRateName'])
     && isset($_POST['style']) && !empty($_POST['style']) && isset($_POST['sauce']) && isset($_POST['dough']) && isset($_POST['crust']) 
     && isset($_POST['cheese']) && isset($_POST['authenticity']) && isset($_POST['overall'])){
-    
+
     $addPizzaSql = "INSERT INTO PIZZA (PIZZERIA_ID, NAME, STYLE) VALUES (\"".$_POST['pzRateID']."\", \"".$_POST['pRateName']."\", \"".$_POST['style']."\")";
     $addpizza = mysqli_query($mysqli, $addPizzaSql);
-    
-    $pizzaIdSql = 
+
+    $pizzaIdSql =
     "SELECT P.ID FROM PIZZA P, PIZZERIA PZ WHERE PZ.ID = P.PIZZERIA_ID AND PZ.ID = ".$_POST['pzRateID']." AND P.NAME = \"".$_POST['pRateName']."\"";
     $getPizzaID = new MySqlArrayBasic($pizzaIdSql);
     $pizzaIDArray = $getPizzaID->getArray();
     $pizzaID = $pizzaIDArray[0]["ID"];
-    
-    $addRatingsSql = 
+
+    $addRatingsSql =
         "INSERT INTO PIZZA_QUALITY (PIZZERIA_ID, PIZZA_ID, SAUCE_RATING, DOUGH_RATING, CRUST_THICKNESS, CHEESE_RATING, AUTHENTICITY, OVERALL)
             VALUES (".$_POST['pzRateID'].", ".$pizzaID.", ".$_POST['sauce'].", ".$_POST['dough'].", ".$_POST['crust'].", ".$_POST['cheese'].", ".$_POST['authenticity'].", ".$_POST['overall'].")";
     $addRatings = mysqli_query($mysqli, $addRatingsSql);
@@ -53,7 +52,7 @@ if(isset($_POST['pzRateID']) && !empty($_POST['pzRateID']) && isset($_POST['pRat
             <br/>
             <table>
                 <thead>
-                    <h3 align = "center">Recommend a new pizzeria to be rated:</h3>
+                    <h3 align = "center">Recommend a new Pizzeria to be Rated:</h3>
                     <th border = "hidden">Pizzeria Name</th><th>City</th><th></th>
                 </thead>
                 <tbody>
@@ -102,7 +101,7 @@ if(isset($_POST['pzRateID']) && !empty($_POST['pzRateID']) && isset($_POST['pRat
                         </td>
                         <td>
                             <input type = 'text' name = 'style'>
-                        </td>                             
+                        </td>
                         <td>
                             <select name = 'sauce'>
                                 <?php
@@ -129,7 +128,7 @@ if(isset($_POST['pzRateID']) && !empty($_POST['pzRateID']) && isset($_POST['pRat
                                 }
                                 ?>
                             </select>
-                        </td>                        
+                        </td>
                         <td>
                             <select name = 'cheese'>
                                 <?php
@@ -156,13 +155,13 @@ if(isset($_POST['pzRateID']) && !empty($_POST['pzRateID']) && isset($_POST['pRat
                                 }
                                 ?>
                             </select>
-                        </td>                        
-                        <td>
+                        </td>
+			 <td>
                             <input type = 'submit' value = 'Submit'>
-                            </form>
                         </td>
                     </tr>
                 </tbody>
+		</form>
             </table>
             <br/><br/><br/><br/><br/>
             <table>
