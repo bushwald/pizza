@@ -1,19 +1,21 @@
 <?php
+//include SQL file, DB connection info, and MySQL Array and Table creator
 include($_SERVER['DOCUMENT_ROOT'] . "/classes/MySqlArray.php");
 include($_SERVER['DOCUMENT_ROOT'] . "/pizzaSql.php");
 include ($_SERVER['DOCUMENT_ROOT'] . "/db_connect.php");
+//build arrays of pizzeria and ratings dropdowns for pizza rating form
 $quality = new MySqlArrayBasic($qualityRatingSql);
 $qualityArray = $quality->getArray();
 $thickness = new MySqlArrayBasic($crustRatingSql);
 $thicknessArray = $thickness->getArray();
 $pizzeria = new MySqlArrayBasic($pizzeriaSql);
 $pizzeriaArray = $pizzeria->getArray();
-
+//if a pizzeria was recommended, add it to the database
 if(isset($_POST['pName']) && !empty($_POST['pName']) && isset($_POST['pCity']) && !empty($_POST['pCity'])){
     $addPizzeriaSql = "INSERT INTO PIZZERIA (NAME, CITY) VALUES (\"".$_POST['pName']."\", \"".$_POST['pCity']."\")";
     $addPizzeria = mysqli_query($mysqli, $addPizzeriaSql);
 }
-
+//if a pizza was rated, add it to the database
 if(isset($_POST['pzRateID']) && !empty($_POST['pzRateID']) && isset($_POST['pRateName']) && !empty($_POST['pRateName'])
     && isset($_POST['style']) && !empty($_POST['style']) && isset($_POST['sauce']) && isset($_POST['dough']) && isset($_POST['crust']) 
     && isset($_POST['cheese']) && isset($_POST['authenticity']) && isset($_POST['overall'])){
@@ -46,6 +48,7 @@ if(isset($_POST['pzRateID']) && !empty($_POST['pzRateID']) && isset($_POST['pRat
             <h4 align = "center">A Pizza Database and Ratings System by Bradley Allen</h4></p>
             <br/>
             <?php
+	    //Build table of existing pizza recommendations
             $pizzaSummary = new MySqlArrayBasic($pizzaSql);
             $pizzaSummary->createTable();
             ?>
@@ -74,6 +77,7 @@ if(isset($_POST['pzRateID']) && !empty($_POST['pzRateID']) && isset($_POST['pRat
             <br/>
             <h4 align = "center">Pizzerias Awaiting Pizza Ratings:</h4>
             <?php
+	    //build table of recommended pizzerias that don't have pizza ratings
             $recSummary = new MySqlArrayBasic($recommendedSql);
             $recSummary->createTable();
             ?>
@@ -90,6 +94,7 @@ if(isset($_POST['pzRateID']) && !empty($_POST['pzRateID']) && isset($_POST['pRat
                             <?php echo "<form name = 'pizzeria' method = \"POST\" ACTION=\"\">"; ?>
                             <select name = 'pzRateID'>
                                 <?php
+				//build pizzeria options
                                 for($i = 0; $i < $pizzeria->getRows(); $i++){
                                     echo "<option value = ".$pizzeriaArray[$i]["ID"].">".$pizzeriaArray[$i]["NAME"]."</option>\n";
                                 }
@@ -105,6 +110,7 @@ if(isset($_POST['pzRateID']) && !empty($_POST['pzRateID']) && isset($_POST['pRat
                         <td>
                             <select name = 'sauce'>
                                 <?php
+				//build quality rating options
                                 for($i = 0; $i < $quality->getRows(); $i++){
                                     echo "<option value = ".$qualityArray[$i]["ID"].">".$qualityArray[$i]["NAME"]."</option>\n";
                                 }
@@ -123,6 +129,7 @@ if(isset($_POST['pzRateID']) && !empty($_POST['pzRateID']) && isset($_POST['pRat
                         <td>
                             <select name = 'crust'>
                                 <?php
+				//build thickness options
                                 for($i = 0; $i < $thickness->getRows(); $i++){
                                     echo "<option value = ".$thicknessArray[$i]["ID"].">".$thicknessArray[$i]["NAME"]."</option>\n";
                                 }
