@@ -1,2 +1,2 @@
 # pizza
-Demonstration of PHP, SQL abilities with some OOP
+Demonstration of PHP, SQL abilities
