@@ -53,7 +53,7 @@ if(isset($_POST['pzRateID']) && !empty($_POST['pzRateID']) && isset($_POST['pRat
             $pizzaSummary->createTable();
             ?>
             <br/>
-            <table>
+            <table class = "cDivTable">
                 <thead>
                     <h3 align = "center">Recommend a new Pizzeria to be Rated:</h3>
                     <th border = "hidden">Pizzeria Name</th><th>City</th><th></th>
@@ -82,11 +82,10 @@ if(isset($_POST['pzRateID']) && !empty($_POST['pzRateID']) && isset($_POST['pRat
             $recSummary->createTable();
             ?>
             <br/>
-            <table>
+            <table class = "cDivTable">
                 <thead>
                     <h3 align = "center">Rate a New Pizza</h3>
-                    <th>Pizzeria Name</th><th>Pizza Name</th><th>Pizza Style</th><th>Sauce</th><th>Dough</th>
-                        <th>Crust Thickness</th><th>Cheese</th><th>Authenticity</th><th>Overall Rating</th><th></th>
+                    <th>Pizzeria Name</th><th>Pizza Name</th><th>Pizza Style</th>
                 </thead>
                 <tbody>
                     <tr>
@@ -107,6 +106,13 @@ if(isset($_POST['pzRateID']) && !empty($_POST['pzRateID']) && isset($_POST['pRat
                         <td>
                             <input type = 'text' name = 'style'>
                         </td>
+                    </tr>
+                </tbody>
+                    <tr>
+                        <th>Sauce</th><th>Dough</th><th>Crust Thickness</th>
+                    </tr>
+                <tbody>
+                    <tr>
                         <td>
                             <select name = 'sauce'>
                                 <?php
@@ -136,6 +142,13 @@ if(isset($_POST['pzRateID']) && !empty($_POST['pzRateID']) && isset($_POST['pRat
                                 ?>
                             </select>
                         </td>
+                    </tr>
+                </tbody>
+                    <tr>
+                        <th>Cheese</th><th>Authenticity</th><th>Overall Rating</th>
+                    </tr>
+                <tbody>
+                    <tr>
                         <td>
                             <select name = 'cheese'>
                                 <?php
@@ -163,13 +176,15 @@ if(isset($_POST['pzRateID']) && !empty($_POST['pzRateID']) && isset($_POST['pRat
                                 ?>
                             </select>
                         </td>
-			 <td>
-                            <input type = 'submit' value = 'Submit'>
-                        </td>
                     </tr>
+                    <tr>
+                        <td></td><td align="center"><input type = 'submit' value = 'Submit'></td>
+                    </tr>
+                        </form>
                 </tbody>
-		</form>
             </table>
+                    <!--<div style = "text-align: center;"><span></span></div>-->
+                
             <br/><br/><br/><br/><br/>
             <table>
                 <tr>
